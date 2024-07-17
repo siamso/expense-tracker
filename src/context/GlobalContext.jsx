@@ -1,9 +1,9 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 
 export const GlobalContext = createContext(null);
-
 function GlobalState({ children }) {
-  return <GlobalContext.Provider>{children}</GlobalContext.Provider>;
+  const [ds, setDs] = useState("");
+  return <GlobalContext.Provider value={ds}>{children}</GlobalContext.Provider>;
 }
 
 export default GlobalState;
