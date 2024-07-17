@@ -14,13 +14,19 @@ function GlobalState({ children }) {
   const [allTransaction, setAllTransaction] = useState([]);
 
   const handleFormSubmit = (currentFormData) => {
-    console.log(currentFormData);
+    if (!currentFormData.description || !currentFormData.amount) return;
+
+    setAllTransaction([
+      ...allTransaction,
+      { ...currentFormData, id: Date.now() },
+    ]);
+    console.log(currentFormData, allTransaction);
   };
 
   return (
     <GlobalContext.Provider
-      value={
-        (formData,
+      value={{
+        formData,
         setFormData,
         value,
         setValue,
@@ -30,8 +36,8 @@ function GlobalState({ children }) {
         setTotalExpense,
         allTransaction,
         setAllTransaction,
-        handleFormSubmit)
-      }
+        handleFormSubmit,
+      }}
     >
       {children}
     </GlobalContext.Provider>
